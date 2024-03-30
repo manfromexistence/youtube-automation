@@ -52,13 +52,26 @@
 # destination_path = './video/youtube'
 # video_stream.download(output_path=destination_path)
 
-import os
+# import os
 
-def download_video(url):
-    command = f"youtube-dl {url} --verbose"
-    os.system(command)
+# def download_video(url):
+#     command = f"youtube-dl {url} --verbose"
+#     os.system(command)
 
-# Replace with your YouTube video URL
-url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-download_video(url)
+# # Replace with your YouTube video URL
+# url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+# download_video(url)
 
+# pytube==15.0.0
+from pytube import YouTube
+from pytube.innertube import _default_clients
+
+_default_clients["ANDROID_MUSIC"] = _default_clients["ANDROID"]
+extractYB = YouTube("https://www.youtube.com/shorts/QRAm1kkzvMg")
+
+
+video_stream = extractYB.streams.get_highest_resolution()
+destination_path = './video/youtube'
+video_stream.download(output_path=destination_path)
+video_size_bytes = video_stream.filesize
+video_duration_seconds = extractYB.lengt
